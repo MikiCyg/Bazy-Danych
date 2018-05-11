@@ -1,11 +1,20 @@
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Wybrzeże Gdańsk', 1);
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Wisła płock', 2);
+INSERT INTO public.drużyna (nazwa, id) VALUES ('Iskra Kielce',4);
+INSERT INTO public.drużyna (nazwa, id) VALUES ('Vive Targi Kielce',4);
+INSERT INTO public.drużyna (nazwa, id) VALUES ('Spójnia Gdynia',5);
+
 
 INSERT INTO public.hala (id, pojemność, adres, koszt_wynajęcia) VALUES (1, 10000, 'Gdańsk ul zwycięstwa 51', 1000);
-INSERT INTO public.hala (id, pojemność, adres, koszt_wynajęcia) VALUES (2, 50000, 'Kielcie ul. Niepodległości', 12000);
+INSERT INTO public.hala (id, pojemność, adres, koszt_wynajęcia) VALUES (2, 50000, 'Kielce ul. Niepodległości', 12000);
+INSERT INTO public.hala (id, pojemność, adres, koszt_wynajęcia) VALUES (3, 25000, 'Płock ul. Świętojańska', 4000);
+INSERT INTO public.hala (id, pojemność, adres, koszt_wynajęcia) VALUES (4, 2000, 'Gdynia ul. legionów 42', 600);
 
 INSERT INTO public.mecz (id, rzeczywista_godzina_rozp, wynik, rzeczywista_godzina_zakoń) VALUES (1, '18:30:00', '27:30', '19:45:00');
 INSERT INTO public.mecz (id, rzeczywista_godzina_rozp, wynik, rzeczywista_godzina_zakoń) VALUES (2, '18:30:00', '31:34', '20:00:00');
+INSERT INTO public.mecz (id, rzeczywista_godzina_rozp, wynik, rzeczywista_godzina_zakoń) VALUES (3, '15:30:00', '20:21', '16:45:00');
+INSERT INTO public.mecz (id, rzeczywista_godzina_rozp, wynik, rzeczywista_godzina_zakoń) VALUES (4, '16:00:00', '25:25', '17:00:00');
+INSERT INTO public.mecz (id, rzeczywista_godzina_rozp, wynik, rzeczywista_godzina_zakoń) VALUES (5, '18:00:00', '34:17', '19:45:00');
 
 INSERT INTO public.sędzia (nazwisko, imie, pesel, data_urodzeni, licencja_sędziowska) VALUES ('Pawlak', 'Mieczysław', 53122840694, '1984-05-04', 573918);
 INSERT INTO public.sędzia (nazwisko, imie, pesel, data_urodzeni, licencja_sędziowska) VALUES ('Piotrowski', 'Wiesław', 73102367797, '1972-09-06', 684320);
