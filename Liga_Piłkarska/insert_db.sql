@@ -1,6 +1,6 @@
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Wybrzeże Gdańsk', 1);
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Wisła płock', 2);
-INSERT INTO public.drużyna (nazwa, id) VALUES ('Iskra Kielce',4);
+INSERT INTO public.drużyna (nazwa, id) VALUES ('Iskra Kielce',3);
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Vive Targi Kielce',4);
 INSERT INTO public.drużyna (nazwa, id) VALUES ('Spójnia Gdynia',5);
 
