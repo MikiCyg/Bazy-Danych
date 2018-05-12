@@ -7,10 +7,6 @@ create table "drużyna"
 )
 ;
 
-create unique index "drużyna_id_uindex"
-	on "drużyna" (id)
-;
-
 create table trener
 (
 	nazwisko varchar(10) not null,
@@ -20,7 +16,8 @@ create table trener
 	pesel real not null,
 	licencja_trenerska serial not null
 		constraint trener_licencja_trenerska_pk
-			primary key
+			primary key,
+	id integer
 		constraint "trener_drużyna_id_fk"
 			references "drużyna"
 				on update cascade on delete set null
@@ -38,17 +35,13 @@ create table zawodnik
 	"ilość_bramek" integer,
 	data_urodzenia date not null,
 	id serial not null
-		constraint zawodnik_pkey
-			primary key
 		constraint "zawodnik_drużyna_id_fk"
 			references "drużyna"
 				on update cascade on delete set null,
 	pesel double precision not null
+		constraint zawodnik_pesel_pk
+			primary key
 )
-;
-
-create unique index zawodnik_licencja_sportowa_uindex
-	on zawodnik (id)
 ;
 
 create unique index zawodnik_pesel_uindex
@@ -104,13 +97,13 @@ create table mecz
 				on update cascade on delete set null
 		constraint "mecz_drużyna_id_fk"
 			references "drużyna"
-				on update cascade on delete set null
-		constraint mecz_hala_id_fk
-			references hala
 				on update cascade on delete set null,
 	rzeczywista_godzina_rozp time,
 	wynik varchar(20),
-	"rzeczywista_godzina_zakoń" time
+	"rzeczywista_godzina_zakoń" time,
+	hala varchar(120)
+		constraint mecz_hala_adres_fk
+			references hala (adres)
 )
 ;
 
