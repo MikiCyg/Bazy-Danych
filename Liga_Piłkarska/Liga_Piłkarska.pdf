@@ -1,0 +1,85 @@
+1.Najwa¿niejsz¹ encj¹ jest tabela mecz, która ma relacje z prawie wszystkimi innymi encjami. Jedynie nie jest po³¹czony z tabel¹ "zawodni" oraz "trener". Mecz ma 4 w³asne atrybuty.
+
+-U¿yæ Inner Join aby pokazaæ w jakiej dru¿ynie dany zawodnik jest.
+-Wyliczyæ œredni¹ iloœæ bramek jak¹ zawodnik zdobywa.
+-Grupowanie i sortowanie zawodników po iloœci zdobytych bramek.
+-Arytemtyczne wyliczenie rzeczywistego czasu rozgrywki.
+-Znalezienie wszystkich druzyn znajduj¹cych sie w P³ocku.
+-Pokazanie wszystkich zawodników graj¹cych w danej dru¿ynie.
+Sprawdzanie warunku NULL na podstawie zawodnika który nie zdoby³ ¿adnej bramki.
+-Zmiana dru¿yny jak¹ trenuj¹ renerzy.
+-Usuniêcie z tabeli starych rozgrywek.
+
+
+2.
+ 
+Tabela dru¿yna
+Wybrze¿e Gdañsk,1
+Wis³a p³ock,2
+
+Tabela hala
+1	10000	Gdañsk ul zwyciêstwa 51	1000
+2	50000	Kielce ul. Niepodleg³oœci	12000
+
+Tabela mecz
+4	16:00:00	25:25	17:00:00	P³ock ul. Œwiêtojañska
+2	18:30:00	""	20:00:00	Gdañsk ul zwyciêstwa 51
+
+Tabela sêdzia
+Pawlak	Mieczys³aw	53122840694	1984-05-04	573918
+Piotrowski	Wies³aw	73102367797	1972-09-06	684320
+
+Tabela termin
+1	1	18:00:00	17:00:00	2017-05-11
+2	9	15:00:00	14:00:00	2017-10-13
+
+Tabela trener
+Ulatowski	Rados³aw	1	1991-06-07	45032870000	1	1
+Rutkowski	Bogus³aw	2	1984-02-16	39050195000	2	2
+
+Tabela zawodnik
+Mateusz Kierat	72	1993-01-07	1	66100765000
+Jakub	   Czaja	21	1998-02-25	3	44100166138
+Tomek	   Zwolakiewicz	1997-01-27	5	64061221350
+
+
+
+--œrednia iloœæ bramek na zawodnika w lidze
+select avg(iloœæ_bramek) from zawodnik
+;
+58.3636363636363636
+
+--Wystêpowanie z³¹czenia pomiêdzy dru¿yn¹ a zawodnikiem za pomoc¹ INNER JOIN
+SELECT * FROM dru¿yna INNER JOIN zawodnik z on dru¿yna.id = z.id
+;
+Wybrze¿e Gdañsk  1 Mateusz Kierat 72	1993-01-07	1 66100765000
+Iskra Kielce 3 Jakub Czaja 21	1998-02-25 3 44100166138
+
+--Grupowanie zawodników po iloœci bramek
+SELECT iloœæ_bramek FROM zawodnik GROUP BY iloœæ_bramek order by iloœæ_bramek
+;
+2
+3
+
+--Arytmetyczne wyliczenie rzeczywistego czasu rozgrywki
+SELECT *, rzeczywista_godzina_zakoñ-rzeczywista_godzina_rozp
+  AS rzeczywisty_czas_meczu
+    FROM mecz ORDER BY rzeczywisty_czas_meczu
+
+4 16:00:00 25:25 17:00:00 P³ock ul. Œwiêtojañska 0 years 0 mons 0 days 1 hours 0 mins 0.00 secs
+3 15:30:00 20:21 16:45:00 Kielce ul. Niepodleg³oœci	0 years 0 mons 0 days 1 hours 15 mins 0.00 secs
+
+--Zapytania zagnie¿d¿one- zawodnicy którzy graj¹ w dru¿ynie Wis³a P³ock
+SELECT nazwisko from zawodnik WHERE id IN
+      (SELECT dru¿yna.id FROM dru¿yna WHERE id = 2)
+;
+Mokosa
+Kude³ka
+Lewandowski
+
+--Warunek Null zawodnicy którzy nie maj¹ ¿adnej bramki
+SELECT * FROM zawodnik WHERE iloœæ_bramek IS NULL
+;
+Tomek Lewandowski 1994-01-27 2 34080548900
+Tomek Zwolakiewicz 1997-01-27 5 64061221350
+

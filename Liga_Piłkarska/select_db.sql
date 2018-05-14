@@ -5,8 +5,8 @@ SELECT * FROM drużyna INNER JOIN zawodnik z on drużyna.id = z.id
 --średnia ilość bramek na zawodnika w lidze
 select avg(ilość_bramek) from zawodnik
 ;
---Grupowanie zawodników po ilości bramek
-SELECT ilość_bramek FROM zawodnik GROUP BY ilość_bramek order by ilość_bramek
+--Wyliczenie ile drużyny posiadają zawodników
+SELECT count(imie), drużyna FROM zawodnik GROUP BY drużyna order by drużyna
 ;
 --Arytmetyczne wyliczenie rzeczywistego czasu rozgrywki
 SELECT *, rzeczywista_godzina_zakoń-rzeczywista_godzina_rozp
@@ -17,8 +17,8 @@ SELECT *, rzeczywista_godzina_zakoń-rzeczywista_godzina_rozp
 SELECT * FROM drużyna WHERE nazwa LIKE '%płock%'
 ;
 --Zapytania zagnieżdżone- zawodnicy którzy grają w drużynie Wisła Płock
-SELECT nazwisko from zawodnik WHERE id IN
-      (SELECT drużyna.id FROM drużyna WHERE id = 2)
+SELECT nazwisko from zawodnik WHERE drużyna IN
+      (SELECT drużyna.nazwa FROM drużyna WHERE nazwa='%płock%')
 ;
 --Warunek Null
 SELECT * FROM zawodnik WHERE ilość_bramek IS NULL
@@ -39,6 +39,6 @@ WHERE data_spotkania<2017-07-16
 ;
 --Update w tabeli
 Update trener
-  SET id = NULL
-WHERE id = 1
+  SET drużyna = NULL
+WHERE drużyna = 1
 ;
