@@ -14,8 +14,8 @@ dnia timestamp(6) NOT NULL
 
 
 CREATE OR REPLACE FUNCTION log_zmiana_drużyny_zawodnika()
-  RETURNS trigger as
-  $BODY$
+  RETURNS trigger as $$
+
 BEGIN
 IF new.drużyna <> old.drużyna THEN
   INSERT INTO zawodnik_zmiana_drużyny(imie, nazwisko, pesel, drużyna, dnia)
@@ -24,7 +24,8 @@ end if;
 
 RETURN new;
 end;
-$BODY$;
+$$ language 'plpgsql'
+;
 
   CREATE TRIGGER zmiana_drużyny
   BEFORE UPDATE
