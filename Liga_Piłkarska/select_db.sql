@@ -1,11 +1,11 @@
 --Występowanie złączenia pomiędzy drużyną a zawodnikiem za pomocą INNER JOIN
-SELECT * FROM drużyna INNER JOIN zawodnik z on drużyna.id = z.id
+SELECT * FROM mecz INNER JOIN hala h2 on mecz.hala = h2.adres
 ;
 
 --średnia ilość bramek na zawodnika w lidze
 select avg(ilość_bramek) from zawodnik
 ;
---Wyliczenie ile drużyny posiadają zawodników
+--Wyliczenie jaką ilość zawodników posiadają drużyny
 SELECT count(imie), drużyna FROM zawodnik GROUP BY drużyna order by drużyna
 ;
 --Arytmetyczne wyliczenie rzeczywistego czasu rozgrywki
@@ -16,9 +16,9 @@ SELECT *, rzeczywista_godzina_zakoń-rzeczywista_godzina_rozp
 --Warunki odwołujące się do wzorców napisów
 SELECT * FROM drużyna WHERE nazwa LIKE '%płock%'
 ;
---Zapytania zagnieżdżone- zawodnicy którzy grają w drużynie Wisła Płock
-SELECT nazwisko from zawodnik WHERE drużyna IN
-      (SELECT drużyna.nazwa FROM drużyna WHERE nazwa='%płock%')
+--Wyświetla zawodników których statystyka strzelonych bramek jest większa niż ogólna średnia
+SELECT imie, nazwisko FROM zawodnik WHERE ilość_bramek>(
+select avg(ilość_bramek) from zawodnik)
 ;
 --Warunek Null
 SELECT * FROM zawodnik WHERE ilość_bramek IS NULL
@@ -33,12 +33,12 @@ SELECT * FROM sędzia_view
 ;
 DROP VIEW Sędzia_VIEW
 ;
---Usuwanie z tabeli
-DELETE FROM termin
-WHERE data_spotkania<2017-07-16
+--Usuwanie z tabeli: Usunięcie zawodnika z bazy danych
+DELETE FROM zawodnik
+WHERE pesel<85013069330
 ;
---Update w tabeli
+--Zmiana drużyny którą trenuje dany trener
 Update trener
   SET drużyna = NULL
-WHERE drużyna = 1
+WHERE pesel = 39050195000
 ;
