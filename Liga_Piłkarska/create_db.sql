@@ -37,7 +37,7 @@ create table zawodnik
 	nazwisko varchar(60),
 	"ilość_bramek" integer,
 	data_urodzenia date not null,
-	"drużyna" serial not null
+	"drużyna" varchar(60) not null
 		constraint "zawodnik_drużyna_nazwa_fk"
 			references "drużyna" (nazwa),
 	pesel double precision not null
