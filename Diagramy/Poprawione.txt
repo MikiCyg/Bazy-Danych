@@ -1,7 +1,0 @@
-    operacja (id chirurga, imię i nazwisko pacjenta, imię i nazwisko pielęgniarki, planowana data i godzina operacji, data i godzina rozpoczęcia operacji, data i godzina zakończenia operacji, )
-    chirurg (imię i nazwisko id)
-    pielęgniarka (imię i nazwisko id)
-    pacjent (imię i nazwisko, rok u urodznia, numer dowodu)
-    stanowisko (pensja nazwa stanowiska, id stanowiska)
-    budynek(numer budynku, ulica, id)
-    Sala(numer sali, id)
